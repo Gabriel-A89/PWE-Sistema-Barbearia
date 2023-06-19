@@ -8,7 +8,11 @@
 </head>
 <body>
 	<%
-		response.getWriter().write("Hello World");
+		//Cookie userId = new Cookie("userId", "123456");
+		//userId.setMaxAge(60*60*24*7);
+		//response.addCookie(userId);
+		
+		session.setAttribute("userId","123456");
 	%>
 </body>
 </html>
