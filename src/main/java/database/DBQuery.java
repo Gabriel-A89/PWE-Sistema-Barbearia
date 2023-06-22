@@ -1,6 +1,5 @@
 package database;
 
-
 import java.sql.ResultSet; 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,6 +28,12 @@ public class DBQuery {
 			
 		}
 		return null;
+	}
+	
+	public String clearSQLInjection(String value) {
+		String strOutput = value;
+		strOutput = strOutput.replace("'","`").replace("\"","``");
+	    return strOutput;
 	}
 	
 	public DBQuery(	String tableName, String fieldsName,  String fieldKey) {
@@ -97,14 +102,14 @@ public class DBQuery {
 			System.out.print(sql);
 			return ( this.execute(sql));
 		}else{
-			System.out.print("O n�mero de valores informados n�o � equivalente aos campos da tabela!");
+			System.out.print("O número de valores informados não é equivalente aos campos da tabela!");
 		}	
 		return 0;
 	}
 	
 	public int delete(String[] values) {
 		if (values.length != this.fieldsName.length){
-			System.out.println("\n A quantidade de campos � diferente da quantidade de valores!");
+			System.out.println("\n A quantidade de campos é diferente da quantidade de valores!");
 			return ( 0 );
 		}
 		
@@ -120,7 +125,7 @@ public class DBQuery {
 	public int update(String[] values) {
 		
 		if (values.length != this.fieldsName.length){
-			System.out.println("\n A quantidade de campos � diferente da quantidade de valores!");
+			System.out.println("\n A quantidade de campos é diferente da quantidade de valores!");
 			return ( 0 );
 		}
 		

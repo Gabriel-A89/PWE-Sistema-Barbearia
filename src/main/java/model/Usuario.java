@@ -1,6 +1,5 @@
 package model;
 
-
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
@@ -18,11 +17,12 @@ public class Usuario {
 	private String cpf;
 	private String telefone;
 	private String foto;
-    private String usuarioDAO;
-    
+	private int idTipoUsuario;
+	
+    private UsuarioDAO usuarioDAO;
 	
 	private String tableName = "usuarios";
-	private String fieldsName = "idUsuario, email, senha, idNivelUsuario, nome, cpf, telefone, foto, usuarioDAO"; 
+	private String fieldsName = "idUsuario, nome, email, senha, telefone, cpf, foto, idTipoUsuario"; 
 	private String fieldKey = "idUsuario";
 	private DBQuery dbQuery = new DBQuery(tableName, fieldsName, fieldKey);
 			
@@ -30,7 +30,7 @@ public class Usuario {
 		
 	}
 	
-	public Usuario(int idUsuario, String email, String senha, int idNivelUsuario, String nome, String cpf, String telefone, String foto, String usuarioDAO){
+	public Usuario(int idUsuario, String email, String senha, int idNivelUsuario, String nome, String cpf, String telefone, String foto){
 		this.setIdUsuario(idUsuario);
 		this.setEmail(email);
 		this.setSenha(senha);
@@ -39,7 +39,19 @@ public class Usuario {
 		this.setCpf(cpf);
 		this.setTelefone(telefone);
 		this.setFoto(foto);
-		this.setUsuarioDAO(usuarioDAO);
+	}
+	
+	public Usuario(String nome, String email, String senha, String telefone, String cpf){
+		this.setEmail(email);
+		this.setSenha(senha);
+		this.setNome(nome);
+		this.setCpf(cpf);
+		this.setTelefone(telefone);
+	}
+	
+	public Usuario(String email, String senha) {
+		this.setEmail(email);
+		this.setSenha(senha);
 	}
 	
 	public String toString() {
@@ -58,6 +70,20 @@ public class Usuario {
 		return outStr;
 	}
 	
+	public String[] toArray(){
+		return (
+			new String[] {
+					""+this.getIdUsuario(),
+					""+this.getEmail(),
+					""+this.getSenha(),
+					""+this.getNome(),
+					""+this.getCpf(),
+					""+this.getTelefone(),
+					""+this.getFoto(),
+					""+this.getIdTipoUsuario()
+			}
+		);
+	}
 
 	private ArrayList<Usuario> listAll() {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
@@ -73,8 +99,7 @@ public class Usuario {
 								linhas.getString("nome"),
 								linhas.getString("cpf"),
 								linhas.getString("telefone"),
-								linhas.getString("foto"),
-								linhas.getString("usuarioDAO")
+								linhas.getString("foto")
 						)
 				);
 				
@@ -85,12 +110,31 @@ public class Usuario {
 		return(usuarios);
 	}
 	
+    public boolean checkLogin(){
+        dbQuery = new DBQuery("", "", "");
+        
+        this.email = dbQuery.clearSQLInjection(this.email);
+        this.senha = dbQuery.clearSQLInjection(this.senha);
+        
+        //ResultSet lines =  mysqli_fetch_assoc(resultSet);
+        //idUsuario = lines["idUsuario"];
+        return (true);
+    }
+	
 	public void showConsole(){
 		ArrayList<Usuario> usuarios = this.listAll();
 		System.out.println( "");
 		for (int i = 0; i < usuarios.size(); i++) {
 			System.out.println( usuarios.get(i).toString() );
 		}
+	}
+	
+	public void save() {
+		this.dbQuery.insert(this.toArray());
+	}
+	
+	public void delete() {
+		this.dbQuery.delete(this.toArray());
 	}
 	
 	public int getIdUsuario() {
@@ -141,12 +185,24 @@ public class Usuario {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	public String getUsuarioDAO() {
+	public UsuarioDAO getUsuarioDAO() {
 		return usuarioDAO;
 	}
-	public void setUsuarioDAO(String UsuarioDAO) {
-		this.usuarioDAO = UsuarioDAO;
+	public void setUsuarioDAO(UsuarioDAO usuarioDAO) {
+		this.usuarioDAO = usuarioDAO;
 	}
-
-
+	
+	public int getIdTipoUsuario() {
+		return idTipoUsuario;
+	}
+	public void setIdTipoUsuari(int idTipoUsuario) {
+		this.idTipoUsuario = idTipoUsuario;
+	}
+	
+	public String cadFields() {
+		return fieldsName;
+	}
+	public void setIdTipoUsuari(String fieldsName) {
+		this.fieldsName = fieldsName;
+	}
 }

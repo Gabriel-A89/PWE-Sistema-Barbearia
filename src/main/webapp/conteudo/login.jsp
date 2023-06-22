@@ -1,3 +1,4 @@
+<%@ page import="model.Usuario" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,13 +6,14 @@
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link href="../estilo/login.css" rel="stylesheet">
-        <link rel="shortcut icon" href="logo.jpg" />
+        <link rel="shortcut icon" href="Imagens/bom_corte/logo.jpg" />
         <title>BC Login</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
 	<body>
+		<!-- 
 		<script>
 			function VerificacaoCad(){
 				
@@ -23,64 +25,64 @@
 				var confPass= cadastro.confPass.value;
 				
 				if (name.length <3) {
-					cadastro.action = "errorForm.php";
-    				alert("Preencha seu nome, com no mínimo 3 letras");
+					cadastro.action = "errorForm.jsp";
+    				//alert("Preencha seu nome, com no mínimo 3 letras");
     				cadastro.name.focus()
     				return false;
 				} else {
-        			cadastro.action = "cadastro.php";
+        			cadastro.action = "cadastro.jsp";
         		}
 				
 				if (email.length <11) {
-					cadastro.action = "errorForm.php";
-    				alert("Preencha o seu Email corretamente!");
+					cadastro.action = "errorForm.jsp";
+    				//alert("Preencha o seu Email corretamente!");
     				cadastro.email.focus()
     				return false;
 				} else {
-        			cadastro.action = "cadastro.php";
+        			cadastro.action = "cadastro.jsp";
         		}
 				
 				if (pass.length <6) {
 					cadastro.action = "errorForm.php";
-    				alert("Coloque uma senha de no mínimo 6 caracteres!");
+    				//alert("Coloque uma senha de no mínimo 6 caracteres!");
     				cadastro.pass.focus()
     				return false;
 				} else {
-        			cadastro.action = "cadastro.php";
+        			cadastro.action = "cadastro.jsp";
         		}
 				if (confPass.length <6) {
-					cadastro.action = "errorForm.php";
-    				alert("Confirme sua senha!");
+					cadastro.action = "errorForm.jsp";
+    				//alert("Confirme sua senha!");
     				cadastro.confPass.focus()
     				return false;
 				} else {
-        			cadastro.action = "cadastro.php";
+        			cadastro.action = "cadastro.jsp";
         		}
 				if (pass != confPass) {
-					cadastro.action = "errorForm.php";
-    				alert("As senhas estão diferentes!");
+					cadastro.action = "errorForm.jsp";
+    				//alert("As senhas estão diferentes!");
     				cadastro.senha.focus()
     				return false;
 				} else {
-        			cadastro.action = "cadastro.php";
+        			cadastro.action = "cadastro.jsp";
         		}
 				
 				if (telefone.length <= 13 || telefone.length >= 15) {
-					cadastro.action = "errorForm.php";
-    				alert("Preencha seu telefone com 14 digitos!");
+					cadastro.action = "errorForm.jsp";
+    				//alert("Preencha seu telefone com 14 digitos!");
     				cadastro.telefone.focus()
     				return false;
 				} else {
-        			cadastro.action = "cadastro.php";
+        			cadastro.action = "cadastro.jsp";
         		}
 				
 				if (cpf.length <= 10 || cpf.length >= 12) {
-					cadastro.action = "errorForm.php";
-    				alert("Preencha seu Cpf corretamente, com 11 digitos");
+					cadastro.action = "errorForm.jsp";
+    				//alert("Preencha seu Cpf corretamente, com 11 digitos");
     				cadastro.cpf.focus()
     				return false;
 				} else {
-        			cadastro.action = "cadastro.php";
+        			cadastro.action = "cadastro.jsp";
         		}
 			}
 			
@@ -90,46 +92,62 @@
 				var pass= login.password.value;
 				
 				if (email.length <11) {
-					login.action = "errorForm.php";
-    				alert("Preencha o seu Email corretamente!");
+					login.action = "errorForm.jsp";
+    				//alert("Preencha o seu Email corretamente!");
     				login.email.focus()
     				return false;
 				} else {
-        			login.action = "checkLogin.php";
+        			login.action = "checkLogin.jsp";
         		}
         		
         		if (pass.length <6) {
-					login.action = "errorForm.php";
-    				alert("Coloque uma senha de no mínimo 6 caracteres!");
+					login.action = "errorForm.jsp";
+    				//alert("Coloque uma senha de no mínimo 6 caracteres!");
     				login.pass.focus()
     				return false;
 				} else {
-        			login.action = "checkLogin.php";
+        			login.action = "checkLogin.jsp";
         		}
 			}
 		</script>
+		-->
+		<%
+			String name = request.getParameter("name");
+			String email = request.getParameter("email");
+			String pass = request.getParameter("pass");
+			String confPass = request.getParameter("confPass"); 
+			String telefone = request.getParameter("telefone");
+			String cpf = request.getParameter("cpf");
+			
+			Usuario usuario = new Usuario(name, email, pass, telefone, cpf);
+			//DBQuery dbQuery = new DBQuery("usuario", "nome, email, senha, telefone, cpf, foto, tipoIdUsuario", "idUsuario");
+			
+			usuario.save();
+		%>
 		<div id="img">
         	<br>
-        	<a style="text-decoration: none;" href="../"><img id="logo" src="Imagens/bom_corte/logo.jpg" class="img-circle" Alt="logo" title="BomCorte"></a>
+        	<a style="text-decoration: none;" href="../">
+        		<img id="logo" src="../Imagens/bom_corte/logo.jpg" class="img-circle" Alt="logo" title="BomCorte">
+        	</a>
         </div>
         <div id="ajuste">
         	<div class="LogContainer">
 	            <input type="checkbox" id="chk" aria-hidden="true">
 	            <div class="cad">
-					<form name="cadastro" id="formCad" method="post" action="" enctype="multipart/form-data">
+					<form name="cadastro" id="formCad" method="POST" action="" enctype="multipart/form-data">
 	                	<label id="sta" for="chk" aria-hidden="true">Cadastre-se</label>
 	                	<div id="roll">
-	                    	<input onchange="VerificacaoCad(this.value)" type="text" name="name" required placeholder="Nome Completo"> 
-	                    	<input onchange="VerificacaoCad(this.value)" type="Email" name="email" required placeholder="Email"> 
-	                    	<input onchange="VerificacaoCad(this.value)" type="password" name="pass" required placeholder="Senha"> 
-	                    	<input onchange="VerificacaoCad(this.value)" type="password" name="confPass" required placeholder="Confirme a senha"> 
-	                    	<input onchange="VerificacaoCad(this.value)" type="tel" name="telefone" pattern="+[0-9]{13}" maxlength='14' required placeholder="+9999999999999">
+	                    	<input  type="text" name="name" required placeholder="Nome Completo" > 
+	                    	<input  type="Email" name="email" required placeholder="Email"> 
+	                    	<input  type="password" name="pass" required placeholder="Senha"> 
+	                    	<input  type="password" name="confPass" required placeholder="Confirme a senha"> 
+	                    	<input  type="tel" name="telefone" pattern="+[0-9]{13}" maxlength='14' required placeholder="+9999999999999">
 	                    	<p style="color: #FFAA00;"><small>Formato Exemplo: +5511999999999</small></p>
 	                    	<input onchange="VerificacaoCad(this.value)" type="text" name="cpf" maxlength='11' required placeholder="CPF">
 	                    	<p style="color: #FFAA00;"><small>Escreva o CPF tudo junto</small></p> 
 	                    	<!-- <label id="men">Adicione uma foto &#128513; </label>
 	                    		<input type="file" name="foto" class="form-control-file" id="exampleFormControlFile1"> -->
-	                    	<input id="butCad" type="submit" value="Cadastrar"> 
+	                    	<input id="butCad" type="submit" onclick="" value="Cadastrar"> 
 	                	</div>
 	                </form>
 	            </div>
@@ -143,8 +161,5 @@
 	            </div>
         	</div>
         </div>
-	//<%
-	//	session.setAttribute("userId","123456");
-	//%>
 	</body>
 </html>
