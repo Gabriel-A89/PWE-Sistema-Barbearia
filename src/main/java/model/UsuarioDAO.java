@@ -23,10 +23,6 @@ public class UsuarioDAO {
         return (this.dbQuery.select(where));
     }
     
-    public String listByField(String fields, String value ) {
-        return (this.dbQuery.selectByField(fields, value) );
-    }
-    
     public boolean update( Usuario usuario ){
         return (this.dbQuery.update(usuario.toArray()) > 0);
     }

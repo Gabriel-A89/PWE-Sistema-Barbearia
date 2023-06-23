@@ -22,10 +22,12 @@ public class Usuario {
     private UsuarioDAO usuarioDAO;
 	
 	private String tableName = "usuarios";
-	private String fieldsName = "idUsuario, nome, email, senha, telefone, cpf, foto, idTipoUsuario"; 
+	private String fieldsName = "idUsuario, nome, email, senha, telefone, cpf, foto, idTipoUsuario";
+	private String fieldsCadastro = "nome, email, senha, telefone, cpf";
 	private String fieldKey = "idUsuario";
 	private DBQuery dbQuery = new DBQuery(tableName, fieldsName, fieldKey);
-			
+	private DBQuery dbQueryCadastro = new DBQuery(tableName, fieldsCadastro, fieldKey);
+	
 	public Usuario() {
 		
 	}
@@ -42,11 +44,11 @@ public class Usuario {
 	}
 	
 	public Usuario(String nome, String email, String senha, String telefone, String cpf){
+		this.setNome(nome);
 		this.setEmail(email);
 		this.setSenha(senha);
-		this.setNome(nome);
-		this.setCpf(cpf);
 		this.setTelefone(telefone);
+		this.setCpf(cpf);
 	}
 	
 	public Usuario(String email, String senha) {
@@ -81,6 +83,18 @@ public class Usuario {
 					""+this.getTelefone(),
 					""+this.getFoto(),
 					""+this.getIdTipoUsuario()
+			}
+		);
+	}
+	
+	public String[] toArrayCadastro(){
+		return (
+			new String[] {
+					""+this.getNome(),
+					""+this.getEmail(),
+					""+this.getSenha(),
+					""+this.getTelefone(),
+					""+this.getCpf(),
 			}
 		);
 	}
@@ -131,6 +145,10 @@ public class Usuario {
 	
 	public void save() {
 		this.dbQuery.insert(this.toArray());
+	}
+	
+	public void saveCadastro() {
+		this.dbQueryCadastro.insert(this.toArrayCadastro());
 	}
 	
 	public void delete() {

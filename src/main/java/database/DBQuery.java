@@ -79,7 +79,7 @@ public class DBQuery {
 			int rs = statement.executeUpdate(sql);
 			return (rs);
 		}catch (SQLException e) {
-			System.out.println("\nErro: Verifique o comando ou a dependencia de chave extrangeira!");
+			//System.out.println("\nErro: Verifique o comando ou a dependencia de chave extrangeira!");
 		}
 		
 		return 0;
@@ -98,7 +98,7 @@ public class DBQuery {
 		}
 		if ( values.length == this.fieldsName.length){
 			String sql = "INSERT INTO "+this.tableName+" ( "+  this.joinElements(this.fieldsName, ", ");
-			sql += ") VALUES ('"+joinElements(values, "','")+"')";
+			sql += ") VALUES ('"+joinElements(values, "','")+"');";
 			System.out.print(sql);
 			return ( this.execute(sql));
 		}else{

@@ -24,7 +24,7 @@
 			Usuario usuario = new Usuario(name, email, pass, telefone, cpf);
 			//DBQuery dbQuery = new DBQuery("usuario", "nome, email, senha, telefone, cpf, foto, tipoIdUsuario", "idUsuario");
 			
-			usuario.save();
+			usuario.saveCadastro();
 			
 		%>
     	<div id="img">
@@ -37,7 +37,7 @@
             	<%
             		if (usuario.getEmail() != null){
             			out.write("<label id='msgRec' aria-hidden='true'> Cadastro realizado com sucesso </label>");
-            			out.write("<a href='conteudo/login.jsp'><img id='seta' src='../Imagens/seta/arrow.png' Alt='Seta para voltar' title='Seta para voltar'></a>");
+            			out.write("<a href='login.jsp'><img id='seta' src='../Imagens/seta/arrow.png' Alt='Seta para voltar' title='Seta para voltar'></a>");
             		}else {
             			out.write("<label id='msgRec' aria-hidden='true'> Falha ao realizar o Cadastro </label>");
             			out.write("<img id='seta' src='../Imagens/seta/arrow.png' onclick='history.go(-1)' Alt='Seta para voltar' title='Seta para voltar'>");

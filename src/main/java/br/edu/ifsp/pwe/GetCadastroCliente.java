@@ -3,22 +3,21 @@ package br.edu.ifsp.pwe;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GetCookie
+ * Servlet implementation class GetCadastroCliente
  */
-@WebServlet("/getcookie")
-public class GetCookie extends HttpServlet {
+@WebServlet("/conteudo/getcadastrocliente")
+public class GetCadastroCliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetCookie() {
+    public GetCadastroCliente() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,38 +26,24 @@ public class GetCookie extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String texto = "";
-		String userId = getByName(request, "userId");
-		if (userId == null) {
-			texto = "Usuário não logado";
-		}else {
-			texto = "Usuário logado, id: "+userId;
-		}
-		response.getWriter().write(texto);
-	}
-	
-	public String getByName(HttpServletRequest request, String name) {
-		Cookie[] cookies = request.getCookies();
-		int i=1;
-		if (cookies.length > 1) {
-			while (!cookies[i].getName().equals(name) && i < cookies.length - 1){
-				i++;
-			}
-		}
-		if (i >= cookies.length) {
-			return (null);
-		}else {
-			return (cookies[i].getName() + "|" + cookies[i].getValue());
-		}
+		request.setCharacterEncoding("UTF-8");
+		
+		String nome = request.getParameter("name");
+		String email = request.getParameter("email");
+		String pass = request.getParameter("pass");
+		String telefone = request.getParameter("telefone");
+		String cpf = request.getParameter("cpf");
+		
+		System.out.println(nome);
+		
+		response.sendRedirect("cadastro.jsp?nome="+nome+"&email="+email+"&pass="+pass+"&telefone="+telefone+"&cpf="+cpf);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
 	}
 
 }

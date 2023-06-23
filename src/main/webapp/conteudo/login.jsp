@@ -6,7 +6,7 @@
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link href="../estilo/login.css" rel="stylesheet">
-        <link rel="shortcut icon" href="Imagens/bom_corte/logo.jpg" />
+        <link rel="shortcut icon" type="x-icon" href="../Imagens/bom_corte/logo.jpg" />
         <title>BC Login</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -14,7 +14,19 @@
     </head>
 	<body>
 		<!-- 
+
 		<script>
+			function fun(){
+				VerificacaoCad();
+				VerificacaoLog();
+			}
+			
+			document.body.onload = function onloadPreventer(){
+				if (location.hash !== (location.hash = "#loaded")){
+					fun();
+				}
+			}
+			
 			function VerificacaoCad(){
 				
 				var name= cadastro.name.value;
@@ -26,7 +38,7 @@
 				
 				if (name.length <3) {
 					cadastro.action = "errorForm.jsp";
-    				//alert("Preencha seu nome, com no mínimo 3 letras");
+    				alert("Preencha seu nome, com no mínimo 3 letras");
     				cadastro.name.focus()
     				return false;
 				} else {
@@ -35,7 +47,7 @@
 				
 				if (email.length <11) {
 					cadastro.action = "errorForm.jsp";
-    				//alert("Preencha o seu Email corretamente!");
+    				alert("Preencha o seu Email corretamente!");
     				cadastro.email.focus()
     				return false;
 				} else {
@@ -44,7 +56,7 @@
 				
 				if (pass.length <6) {
 					cadastro.action = "errorForm.php";
-    				//alert("Coloque uma senha de no mínimo 6 caracteres!");
+    				alert("Coloque uma senha de no mínimo 6 caracteres!");
     				cadastro.pass.focus()
     				return false;
 				} else {
@@ -52,7 +64,7 @@
         		}
 				if (confPass.length <6) {
 					cadastro.action = "errorForm.jsp";
-    				//alert("Confirme sua senha!");
+    				alert("Confirme sua senha!");
     				cadastro.confPass.focus()
     				return false;
 				} else {
@@ -60,7 +72,7 @@
         		}
 				if (pass != confPass) {
 					cadastro.action = "errorForm.jsp";
-    				//alert("As senhas estão diferentes!");
+    				alert("As senhas estão diferentes!");
     				cadastro.senha.focus()
     				return false;
 				} else {
@@ -69,7 +81,7 @@
 				
 				if (telefone.length <= 13 || telefone.length >= 15) {
 					cadastro.action = "errorForm.jsp";
-    				//alert("Preencha seu telefone com 14 digitos!");
+    				alert("Preencha seu telefone com 14 digitos!");
     				cadastro.telefone.focus()
     				return false;
 				} else {
@@ -78,7 +90,7 @@
 				
 				if (cpf.length <= 10 || cpf.length >= 12) {
 					cadastro.action = "errorForm.jsp";
-    				//alert("Preencha seu Cpf corretamente, com 11 digitos");
+    				alert("Preencha seu Cpf corretamente, com 11 digitos");
     				cadastro.cpf.focus()
     				return false;
 				} else {
@@ -89,11 +101,11 @@
 			function VerificacaoLog(){
 				
 				var email= login.email.value;
-				var pass= login.password.value;
+				var pass= login.pass.value;
 				
 				if (email.length <11) {
 					login.action = "errorForm.jsp";
-    				//alert("Preencha o seu Email corretamente!");
+    				alert("Preencha o seu Email corretamente!");
     				login.email.focus()
     				return false;
 				} else {
@@ -102,28 +114,33 @@
         		
         		if (pass.length <6) {
 					login.action = "errorForm.jsp";
-    				//alert("Coloque uma senha de no mínimo 6 caracteres!");
+    				alert("Coloque uma senha de no mínimo 6 caracteres!");
     				login.pass.focus()
     				return false;
 				} else {
         			login.action = "checkLogin.jsp";
         		}
 			}
+			
+			
+			
+			function validate(name){
+				const name = document.getElementByName("name");
+				const validityState = input.validity;
+				
+				if (validityState.valueMissing){
+					input.setCustomValidity("Preencha");
+				} else if (validityState.rangeUnderflow){
+					input.setCustomValidity("Mais");
+				} else if (validityState.rangeOverflow){
+					input.setCustomValidity("Menos");
+				}
+				
+				input.reportValidity();
+			}
+			
 		</script>
 		-->
-		<%
-			String name = request.getParameter("name");
-			String email = request.getParameter("email");
-			String pass = request.getParameter("pass");
-			String confPass = request.getParameter("confPass"); 
-			String telefone = request.getParameter("telefone");
-			String cpf = request.getParameter("cpf");
-			
-			Usuario usuario = new Usuario(name, email, pass, telefone, cpf);
-			//DBQuery dbQuery = new DBQuery("usuario", "nome, email, senha, telefone, cpf, foto, tipoIdUsuario", "idUsuario");
-			
-			usuario.save();
-		%>
 		<div id="img">
         	<br>
         	<a style="text-decoration: none;" href="../">
@@ -134,7 +151,7 @@
         	<div class="LogContainer">
 	            <input type="checkbox" id="chk" aria-hidden="true">
 	            <div class="cad">
-					<form name="cadastro" id="formCad" method="POST" action="" enctype="multipart/form-data">
+					<form name="cadastro" id="formCad" method="GET" action="getcadastrocliente" enctype="multipart/form-data">
 	                	<label id="sta" for="chk" aria-hidden="true">Cadastre-se</label>
 	                	<div id="roll">
 	                    	<input  type="text" name="name" required placeholder="Nome Completo" > 
@@ -143,20 +160,23 @@
 	                    	<input  type="password" name="confPass" required placeholder="Confirme a senha"> 
 	                    	<input  type="tel" name="telefone" pattern="+[0-9]{13}" maxlength='14' required placeholder="+9999999999999">
 	                    	<p style="color: #FFAA00;"><small>Formato Exemplo: +5511999999999</small></p>
-	                    	<input onchange="VerificacaoCad(this.value)" type="text" name="cpf" maxlength='11' required placeholder="CPF">
+	                    	<input type="text" name="cpf" maxlength='11' required placeholder="CPF">
 	                    	<p style="color: #FFAA00;"><small>Escreva o CPF tudo junto</small></p> 
 	                    	<!-- <label id="men">Adicione uma foto &#128513; </label>
-	                    		<input type="file" name="foto" class="form-control-file" id="exampleFormControlFile1"> -->
-	                    	<input id="butCad" type="submit" onclick="" value="Cadastrar"> 
+	                    		<input type="file" name="foto" class="form-control-file" id="exampleFormControlFile1">
+	                    		<input id="butCad" type="submit" onclick="acao.value='1'; this.form.submit();" value="Cadastrar">  
+	                    	-->
+	                    	<input type="hidden" name="acao" value="0">
+	                    	<button id="butCad" type="button" onclick="acao.value='1'; this.form.submit();">Cadastrar</button> 
 	                	</div>
 	                </form>
 	            </div>
 	            <div class="login">
 	                <form name="login" id="formLogin" method="post" action="">
 	                    <label for="chk" aria-hidden="true"> Login</label>
-	                    <input onchange="VerificacaoLog(this.value)" type="text" name="email" required placeholder="Email"> 
-	                    <input onchange="VerificacaoLog(this.value)" type="password" name="password" required placeholder="Senha"> 
-	                    <input id="butLogin" type="submit" value="Iniciar Sessão"> 
+	                    <input onchange="" type="text" name="email" required placeholder="Email"> 
+	                    <input onchange="" type="password" name="pass" required placeholder="Senha"> 
+	                    <input id="butLogin" type="button" value="Iniciar Sessão"> 
 	                </form>
 	            </div>
         	</div>
