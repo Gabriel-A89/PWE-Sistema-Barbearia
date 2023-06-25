@@ -20,7 +20,7 @@ public class UsuarioDAO {
     }
     
     public ResultSet select(String where ){
-        return (this.dbQuery.select(where));
+        return (this.dbQuery.select(where, ""));
     }
     
     public boolean update( Usuario usuario ){
@@ -32,6 +32,6 @@ public class UsuarioDAO {
     }
     
     public ResultSet listAll() {
-        return (this.dbQuery.select("") );
+        return (this.dbQuery.select("","") );
     }
 }

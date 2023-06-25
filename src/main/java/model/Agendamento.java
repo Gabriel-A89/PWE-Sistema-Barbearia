@@ -41,7 +41,7 @@ public class Agendamento {
 	
 	private ArrayList<Agendamento> listAll() {
 		ArrayList<Agendamento> agendamento = new ArrayList<Agendamento>();
-		ResultSet linhas = this.dbQuery.select("");
+		ResultSet linhas = this.dbQuery.select("","");
 		try {
 			while (linhas.next()) {
 				agendamento.add(

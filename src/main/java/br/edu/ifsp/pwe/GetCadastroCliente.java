@@ -28,15 +28,23 @@ public class GetCadastroCliente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String nome = request.getParameter("name");
+		String nome = request.getParameter("nome");
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
+		String confPass = request.getParameter("confPass");
 		String telefone = request.getParameter("telefone");
 		String cpf = request.getParameter("cpf");
+		String acao = request.getParameter("acao");
 		
-		System.out.println(nome);
+		System.out.println(nome.length());
+		System.out.println(email.length());
+		System.out.println(pass.length());
+		System.out.println(confPass.length());
+		System.out.println(telefone.length());
+		System.out.println(cpf.length());
 		
-		response.sendRedirect("cadastro.jsp?nome="+nome+"&email="+email+"&pass="+pass+"&telefone="+telefone+"&cpf="+cpf);
+		response.sendRedirect("cadastro.jsp?nome="+nome+"&email="+email+"&pass="+pass+"&telefone="+telefone+"&cpf="+cpf+"&acao="+acao);
+
 	}
 
 	/**

@@ -21,7 +21,7 @@ public class Usuario {
 	
     private UsuarioDAO usuarioDAO;
 	
-	private String tableName = "usuarios";
+	private String tableName = "usuario";
 	private String fieldsName = "idUsuario, nome, email, senha, telefone, cpf, foto, idTipoUsuario";
 	private String fieldsCadastro = "nome, email, senha, telefone, cpf";
 	private String fieldKey = "idUsuario";
@@ -32,7 +32,7 @@ public class Usuario {
 		
 	}
 	
-	public Usuario(int idUsuario, String email, String senha, int idNivelUsuario, String nome, String cpf, String telefone, String foto){
+	public Usuario(int idUsuario, String nome, String email, String senha, String telefone, String cpf, String foto, int idTipoUsuario){
 		this.setIdUsuario(idUsuario);
 		this.setEmail(email);
 		this.setSenha(senha);
@@ -54,6 +54,10 @@ public class Usuario {
 	public Usuario(String email, String senha) {
 		this.setEmail(email);
 		this.setSenha(senha);
+	}
+	
+	public Usuario(String email) {
+		this.setEmail(email);
 	}
 	
 	public String toString() {
@@ -101,19 +105,37 @@ public class Usuario {
 
 	private ArrayList<Usuario> listAll() {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		ResultSet linhas = this.dbQuery.select("");
+		ResultSet linhas = this.dbQuery.select("", "");
 		try {
 			while (linhas.next()) {
 				usuarios.add(
 						new Usuario(
 								linhas.getInt("idUsuario"),
+								linhas.getString("nome"),
 								linhas.getString("email"),
 								linhas.getString("senha"),
-								linhas.getInt("idNivelUsuario"),
-								linhas.getString("nome"),
-								linhas.getString("cpf"),
 								linhas.getString("telefone"),
-								linhas.getString("foto")
+								linhas.getString("cpf"),
+								linhas.getString("foto"),
+								linhas.getInt("idTipoUsuario")
+						)
+				);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return(usuarios);
+	}
+	
+	public ArrayList<Usuario> listEmailCadastro(String value) {
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		ResultSet linhas = this.dbQuery.select("", "");
+		try {
+			while (linhas.next()) {
+				usuarios.add(
+						new Usuario(
+								linhas.getString(value)
 						)
 				);
 				

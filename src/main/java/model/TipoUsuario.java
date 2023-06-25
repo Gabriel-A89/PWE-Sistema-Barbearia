@@ -44,7 +44,7 @@ public class TipoUsuario {
 
 	private ArrayList<TipoUsuario> listAll() {
 		ArrayList<TipoUsuario> tipoUsuario = new ArrayList<TipoUsuario>();
-		ResultSet linhas = this.dbQuery.select("");
+		ResultSet linhas = this.dbQuery.select("", "");
 		try {
 			while (linhas.next()) {
 				tipoUsuario.add(

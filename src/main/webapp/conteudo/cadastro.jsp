@@ -1,5 +1,7 @@
 <%@ page import="model.Usuario" %>
 <%@ page import="database.DBQuery" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.SQLException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,17 +16,35 @@
 
     <body>
 	    <%
-			String name = request.getParameter("name");
+	    	String emailDb = "";
+			String nome = request.getParameter("nome");
 			String email = request.getParameter("email");
 			String pass = request.getParameter("pass");
-			String confPass = request.getParameter("confPass"); 
 			String telefone = request.getParameter("telefone");
 			String cpf = request.getParameter("cpf");
+			String acao = request.getParameter("acao");
 			
-			Usuario usuario = new Usuario(name, email, pass, telefone, cpf);
+			Usuario usuario = new Usuario(nome, email, pass, telefone, cpf);
 			//DBQuery dbQuery = new DBQuery("usuario", "nome, email, senha, telefone, cpf, foto, tipoIdUsuario", "idUsuario");
-			
-			usuario.saveCadastro();
+			DBQuery dbQuery = new DBQuery("usuario", "idUsuario, email", "idUsuario");
+			ResultSet rs = dbQuery.select("email", email);
+			try {
+			    
+			    while (rs.next()) {
+			        int id = rs.getInt("idUsuario");
+			        emailDb = rs.getString("email");
+			    }
+			    
+			    rs.close();
+			} catch (SQLException e) {
+			    // Handle any potential exceptions here
+			    e.printStackTrace();
+			}
+			if (emailDb.equals(email)){
+				acao = "0";
+			} else {
+				usuario.saveCadastro();
+			}
 			
 		%>
     	<div id="img">
@@ -33,19 +53,18 @@
         </div>
         <div id="ajuste">
         	<div class="LogContainer">
-            <div class="cad">
-            	<%
-            		if (usuario.getEmail() != null){
-            			out.write("<label id='msgRec' aria-hidden='true'> Cadastro realizado com sucesso </label>");
-            			out.write("<a href='login.jsp'><img id='seta' src='../Imagens/seta/arrow.png' Alt='Seta para voltar' title='Seta para voltar'></a>");
-            		}else {
-            			out.write("<label id='msgRec' aria-hidden='true'> Falha ao realizar o Cadastro </label>");
-            			out.write("<img id='seta' src='../Imagens/seta/arrow.png' onclick='history.go(-1)' Alt='Seta para voltar' title='Seta para voltar'>");
-            		}
-            	%>
-            </div>
-
-        </div>
+	            <div class="cad">
+	            	<%
+	            		if (acao == "1"){
+	            			out.write("<label id='msgRec' aria-hidden='true'> Cadastro realizado com sucesso </label>");
+	            			out.write("<a href='login.jsp'><img id='seta' src='../Imagens/seta/arrow.png' Alt='Seta para voltar' title='Seta para voltar'></a>");
+	            		}else {
+	            			out.write("<label id='msgRec' aria-hidden='true'> Falha ao realizar o Cadastro </label>");
+	            			out.write("<a href='login.jsp'><img id='seta' src='../Imagens/seta/arrow.png' onclick='history.go(-1)' Alt='Seta para voltar' title='Seta para voltar'></a>");
+	            		}
+	            	%>
+	            </div>
+        	</div>
         </div>
     </body>
 </html>

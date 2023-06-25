@@ -85,9 +85,9 @@ public class DBQuery {
 		return 0;
 	}
 
-	public ResultSet select(String where) {
+	public ResultSet select(String where, String value) {
 		String sql = "SELECT "+  this.joinElements(this.fieldsName, ", ") + " FROM " + this.tableName;
-		sql += (( where!="") ? " WHERE "+ where : "" );
+		sql += (( where!="") ? " WHERE "+ where + "="+ "'"+value+"';": "" );
 		System.out.print(sql);
 		return this.query(sql);
 	}
@@ -168,7 +168,6 @@ public class DBQuery {
 	public String getFieldKey() {
 		return fieldKey;
 	}
-
 
 	public void setFieldKey(String fieldKey) {
 		this.fieldKey = fieldKey;

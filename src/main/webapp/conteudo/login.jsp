@@ -13,134 +13,6 @@
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
 	<body>
-		<!-- 
-
-		<script>
-			function fun(){
-				VerificacaoCad();
-				VerificacaoLog();
-			}
-			
-			document.body.onload = function onloadPreventer(){
-				if (location.hash !== (location.hash = "#loaded")){
-					fun();
-				}
-			}
-			
-			function VerificacaoCad(){
-				
-				var name= cadastro.name.value;
-				var email= cadastro.email.value;
-				var telefone= cadastro.telefone.value;
-				var cpf= cadastro.cpf.value;
-				var pass= cadastro.pass.value;
-				var confPass= cadastro.confPass.value;
-				
-				if (name.length <3) {
-					cadastro.action = "errorForm.jsp";
-    				alert("Preencha seu nome, com no mínimo 3 letras");
-    				cadastro.name.focus()
-    				return false;
-				} else {
-        			cadastro.action = "cadastro.jsp";
-        		}
-				
-				if (email.length <11) {
-					cadastro.action = "errorForm.jsp";
-    				alert("Preencha o seu Email corretamente!");
-    				cadastro.email.focus()
-    				return false;
-				} else {
-        			cadastro.action = "cadastro.jsp";
-        		}
-				
-				if (pass.length <6) {
-					cadastro.action = "errorForm.php";
-    				alert("Coloque uma senha de no mínimo 6 caracteres!");
-    				cadastro.pass.focus()
-    				return false;
-				} else {
-        			cadastro.action = "cadastro.jsp";
-        		}
-				if (confPass.length <6) {
-					cadastro.action = "errorForm.jsp";
-    				alert("Confirme sua senha!");
-    				cadastro.confPass.focus()
-    				return false;
-				} else {
-        			cadastro.action = "cadastro.jsp";
-        		}
-				if (pass != confPass) {
-					cadastro.action = "errorForm.jsp";
-    				alert("As senhas estão diferentes!");
-    				cadastro.senha.focus()
-    				return false;
-				} else {
-        			cadastro.action = "cadastro.jsp";
-        		}
-				
-				if (telefone.length <= 13 || telefone.length >= 15) {
-					cadastro.action = "errorForm.jsp";
-    				alert("Preencha seu telefone com 14 digitos!");
-    				cadastro.telefone.focus()
-    				return false;
-				} else {
-        			cadastro.action = "cadastro.jsp";
-        		}
-				
-				if (cpf.length <= 10 || cpf.length >= 12) {
-					cadastro.action = "errorForm.jsp";
-    				alert("Preencha seu Cpf corretamente, com 11 digitos");
-    				cadastro.cpf.focus()
-    				return false;
-				} else {
-        			cadastro.action = "cadastro.jsp";
-        		}
-			}
-			
-			function VerificacaoLog(){
-				
-				var email= login.email.value;
-				var pass= login.pass.value;
-				
-				if (email.length <11) {
-					login.action = "errorForm.jsp";
-    				alert("Preencha o seu Email corretamente!");
-    				login.email.focus()
-    				return false;
-				} else {
-        			login.action = "checkLogin.jsp";
-        		}
-        		
-        		if (pass.length <6) {
-					login.action = "errorForm.jsp";
-    				alert("Coloque uma senha de no mínimo 6 caracteres!");
-    				login.pass.focus()
-    				return false;
-				} else {
-        			login.action = "checkLogin.jsp";
-        		}
-			}
-			
-			
-			
-			function validate(name){
-				const name = document.getElementByName("name");
-				const validityState = input.validity;
-				
-				if (validityState.valueMissing){
-					input.setCustomValidity("Preencha");
-				} else if (validityState.rangeUnderflow){
-					input.setCustomValidity("Mais");
-				} else if (validityState.rangeOverflow){
-					input.setCustomValidity("Menos");
-				}
-				
-				input.reportValidity();
-			}
-			
-		</script>
-		-->
 		<div id="img">
         	<br>
         	<a style="text-decoration: none;" href="../">
@@ -154,32 +26,92 @@
 					<form name="cadastro" id="formCad" method="GET" action="getcadastrocliente" enctype="multipart/form-data">
 	                	<label id="sta" for="chk" aria-hidden="true">Cadastre-se</label>
 	                	<div id="roll">
-	                    	<input  type="text" name="name" required placeholder="Nome Completo" > 
-	                    	<input  type="Email" name="email" required placeholder="Email"> 
-	                    	<input  type="password" name="pass" required placeholder="Senha"> 
-	                    	<input  type="password" name="confPass" required placeholder="Confirme a senha"> 
-	                    	<input  type="tel" name="telefone" pattern="+[0-9]{13}" maxlength='14' required placeholder="+9999999999999">
+	                    	<input id="txtNome" type="text" name="nome" required placeholder="Nome Completo" > 
+	                    	<input id="txtEmail" type="Email" name="email" required placeholder="Email"> 
+	                    	<input id="txtPass" type="password" name="pass" required placeholder="Senha"> 
+	                    	<input id="txtConfPass" type="password" name="confPass" required placeholder="Confirme a senha"> 
+	                    	<input id="txtTelefone" type="tel" name="telefone" maxlength='14' required placeholder="+9999999999999">
 	                    	<p style="color: #FFAA00;"><small>Formato Exemplo: +5511999999999</small></p>
-	                    	<input type="text" name="cpf" maxlength='11' required placeholder="CPF">
+	                    	<input id="txtCpf" type="text" name="cpf" maxlength='11' required placeholder="CPF">
 	                    	<p style="color: #FFAA00;"><small>Escreva o CPF tudo junto</small></p> 
 	                    	<!-- <label id="men">Adicione uma foto &#128513; </label>
 	                    		<input type="file" name="foto" class="form-control-file" id="exampleFormControlFile1">
 	                    		<input id="butCad" type="submit" onclick="acao.value='1'; this.form.submit();" value="Cadastrar">  
 	                    	-->
 	                    	<input type="hidden" name="acao" value="0">
-	                    	<button id="butCad" type="button" onclick="acao.value='1'; this.form.submit();">Cadastrar</button> 
+	                    	<button id="butCad" type="button" onclick="validarCadastro()">Cadastrar</button> 
 	                	</div>
 	                </form>
 	            </div>
 	            <div class="login">
 	                <form name="login" id="formLogin" method="post" action="">
 	                    <label for="chk" aria-hidden="true"> Login</label>
-	                    <input onchange="" type="text" name="email" required placeholder="Email"> 
-	                    <input onchange="" type="password" name="pass" required placeholder="Senha"> 
+	                    <input type="text" name="email" required placeholder="Email"> 
+	                    <input type="password" name="pass" required placeholder="Senha"> 
 	                    <input id="butLogin" type="button" value="Iniciar Sessão"> 
 	                </form>
 	            </div>
         	</div>
         </div>
 	</body>
+	<script type="text/javascript">
+		var erroFormulario = 0;
+		var nome = "";
+		var email = "";
+		var pass = "";
+		var confPass = "";
+		var telefone = "";
+		var cpf = "";
+		
+		var regexEmail = /^(([^<>()[]\.,;:\s@"]+(.[^<>()[]\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+		
+		function validarCadastro(){
+	
+	        nome  = $("#txtNome").val();
+	        email = $("#txtEmail").val();
+	        pass  = $("#txtPass").val();
+	        confPass  = $("#txtConfPass").val();
+	        telefone  = $("#txtTelefone").val();
+	        cpf  = $("#txtCpf").val();
+
+			if (nome.length < 3) {
+				erroFormulario = 1;
+				console.log("nome");
+			}
+			
+			if (pass.length < 3) {
+				erroFormulario = 1;
+				console.log("pass");
+			}
+			
+			if (confPass.length < 3) {
+				erroFormulario = 1;
+				console.log("confpass");
+			}
+			
+			if (telefone.length != 14) {
+				erroFormulario = 1;
+				console.log("telefone");
+			}
+			
+			if (cpf.length != 11) {
+				erroFormulario = 1;
+				console.log("cpf");
+			}
+			
+			//if (!(regexEmail.test(txtEmail.value))) {
+
+	        //    erroFormulario = 1;
+	        //    console.log("email");
+
+	        //}
+			
+			if (erroFormulario == 0) {
+	            location.href = "getcadastrocliente?nome="+nome+"&email="+email+"&pass="+pass+"&telefone="+telefone+"&cpf="+cpf;
+	            console.log("Validação OK");
+			} else {
+				erroFormulario = 0;
+			}
+	    }
+	</script>
 </html>
