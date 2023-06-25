@@ -15,38 +15,6 @@
     </head>
 
     <body>
-	    <%
-	    	String emailDb = "";
-			String nome = request.getParameter("nome");
-			String email = request.getParameter("email");
-			String pass = request.getParameter("pass");
-			String telefone = request.getParameter("telefone");
-			String cpf = request.getParameter("cpf");
-			String acao = request.getParameter("acao");
-			
-			Usuario usuario = new Usuario(nome, email, pass, telefone, cpf);
-			//DBQuery dbQuery = new DBQuery("usuario", "nome, email, senha, telefone, cpf, foto, tipoIdUsuario", "idUsuario");
-			DBQuery dbQuery = new DBQuery("usuario", "idUsuario, email", "idUsuario");
-			ResultSet rs = dbQuery.select("email", email);
-			try {
-			    
-			    while (rs.next()) {
-			        int id = rs.getInt("idUsuario");
-			        emailDb = rs.getString("email");
-			    }
-			    
-			    rs.close();
-			} catch (SQLException e) {
-			    // Handle any potential exceptions here
-			    e.printStackTrace();
-			}
-			if (emailDb.equals(email)){
-				acao = "0";
-			} else {
-				usuario.saveCadastro();
-			}
-			
-		%>
     	<div id="img">
         	<br>
         	<a style="text-decoration: none;"><img id="logo" src="../Imagens/bom_corte/logo.jpg" class="img-circle" Alt="logo" title="BomCorte"></a>
@@ -55,12 +23,13 @@
         	<div class="LogContainer">
 	            <div class="cad">
 	            	<%
-	            		if (acao == "1"){
-	            			out.write("<label id='msgRec' aria-hidden='true'> Cadastro realizado com sucesso </label>");
-	            			out.write("<a href='login.jsp'><img id='seta' src='../Imagens/seta/arrow.png' Alt='Seta para voltar' title='Seta para voltar'></a>");
-	            		}else {
+	            		String acao = request.getParameter("acao");
+	            		if (acao.equals("1")){
 	            			out.write("<label id='msgRec' aria-hidden='true'> Falha ao realizar o Cadastro </label>");
 	            			out.write("<a href='login.jsp'><img id='seta' src='../Imagens/seta/arrow.png' onclick='history.go(-1)' Alt='Seta para voltar' title='Seta para voltar'></a>");
+	            		}else {
+	            			out.write("<label id='msgRec' aria-hidden='true'> Cadastro realizado com sucesso </label>");
+	            			out.write("<a href='login.jsp'><img id='seta' src='../Imagens/seta/arrow.png' Alt='Seta para voltar' title='Seta para voltar'></a>");
 	            		}
 	            	%>
 	            </div>

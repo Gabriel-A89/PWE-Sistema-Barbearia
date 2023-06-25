@@ -37,9 +37,8 @@
 	                    	<!-- <label id="men">Adicione uma foto &#128513; </label>
 	                    		<input type="file" name="foto" class="form-control-file" id="exampleFormControlFile1">
 	                    		<input id="butCad" type="submit" onclick="acao.value='1'; this.form.submit();" value="Cadastrar">  
-	                    	-->
-	                    	<input type="hidden" name="acao" value="0">
-	                    	<button id="butCad" type="button" onclick="validarCadastro()">Cadastrar</button> 
+	                    	-->	
+	                    	<button id="butCad" type="button" onclick="this.form.submit()">Cadastrar</button> 
 	                	</div>
 	                </form>
 	            </div>
@@ -54,64 +53,4 @@
         	</div>
         </div>
 	</body>
-	<script type="text/javascript">
-		var erroFormulario = 0;
-		var nome = "";
-		var email = "";
-		var pass = "";
-		var confPass = "";
-		var telefone = "";
-		var cpf = "";
-		
-		var regexEmail = /^(([^<>()[]\.,;:\s@"]+(.[^<>()[]\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
-		
-		function validarCadastro(){
-	
-	        nome  = $("#txtNome").val();
-	        email = $("#txtEmail").val();
-	        pass  = $("#txtPass").val();
-	        confPass  = $("#txtConfPass").val();
-	        telefone  = $("#txtTelefone").val();
-	        cpf  = $("#txtCpf").val();
-
-			if (nome.length < 3) {
-				erroFormulario = 1;
-				console.log("nome");
-			}
-			
-			if (pass.length < 3) {
-				erroFormulario = 1;
-				console.log("pass");
-			}
-			
-			if (confPass.length < 3) {
-				erroFormulario = 1;
-				console.log("confpass");
-			}
-			
-			if (telefone.length != 14) {
-				erroFormulario = 1;
-				console.log("telefone");
-			}
-			
-			if (cpf.length != 11) {
-				erroFormulario = 1;
-				console.log("cpf");
-			}
-			
-			//if (!(regexEmail.test(txtEmail.value))) {
-
-	        //    erroFormulario = 1;
-	        //    console.log("email");
-
-	        //}
-			
-			if (erroFormulario == 0) {
-	            location.href = "getcadastrocliente?nome="+nome+"&email="+email+"&pass="+pass+"&telefone="+telefone+"&cpf="+cpf;
-	            console.log("Validação OK");
-			} else {
-				erroFormulario = 0;
-			}
-	    }
-	</script>
 </html>
