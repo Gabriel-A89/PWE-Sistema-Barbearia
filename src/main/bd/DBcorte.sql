@@ -23,7 +23,7 @@ CREATE TABLE `usuario` (
 	`email`			VARCHAR(100) UNIQUE, 
     `senha`			VARCHAR(64)  NOT NULL UNIQUE, 
     `telefone`		VARCHAR(15)	 NOT NULL, 
-    `cpf`			VARCHAR(14)  NOT NULL UNIQUE, 
+    `cpf`			VARCHAR(14)  NOT NULL, 
     `foto`			VARCHAR(100) DEFAULT NULL,
     `idTipoUsuario`	INT	         DEFAULT '1', 
 	PRIMARY KEY (`idUsuario`),

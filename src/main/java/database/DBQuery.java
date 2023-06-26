@@ -92,6 +92,13 @@ public class DBQuery {
 		return this.query(sql);
 	}
 	
+	public ResultSet selectLogin(String where, String value) {
+		String sql = "SELECT "+  this.joinElements(this.fieldsName, ", ") + " FROM " + this.tableName;
+		sql += " WHERE email = " + "'"+value+"';";
+		System.out.print(sql);
+		return this.query(sql);
+	}
+	
 	public int insert(String[] values) {
 		for (String value : values) {
 			System.out.println(value);

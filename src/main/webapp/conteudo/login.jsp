@@ -43,11 +43,11 @@
 	                </form>
 	            </div>
 	            <div class="login">
-	                <form name="login" id="formLogin" method="post" action="">
+	                <form name="login" id="formLogin" method="post" action="getlogin">
 	                    <label for="chk" aria-hidden="true"> Login</label>
 	                    <input type="text" name="email" required placeholder="Email"> 
 	                    <input type="password" name="pass" required placeholder="Senha"> 
-	                    <input id="butLogin" type="button" value="Iniciar Sessão"> 
+	                    <button id="butLogin" type="button" onclick="this.form.submit()">Iniciar Sessão</button> 
 	                </form>
 	            </div>
         	</div>
