@@ -5,7 +5,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link href="recSenha_confSenha.css" rel="stylesheet">
+        <link href="../estilo/recSenha_confSenha.css" rel="stylesheet">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <link rel="shortcut icon" href="logo.jpg" />
         <title> BC Login </title>
@@ -14,7 +14,7 @@
     <body>
     	<div id="img">
         	<br>
-        	<a style="text-decoration: none;"><img id="logo" src="logo.jpg" class="img-circle" Alt="logo" title="BomCorte"></a>
+        	<a style="text-decoration: none;"><img id="logo" src="../Imagens/bom_corte/logo.jpg" class="img-circle" Alt="logo" title="BomCorte"></a>
         </div>
         <div id="ajuste">
         	<div class="LogContainer">
@@ -33,7 +33,7 @@
 	            		out.print("<a href='login.jsp'><img id='seta' src='../Imagens/seta/arrow.png' onclick='history.go(-1)' Alt='Seta para voltar' title='Seta para voltar'></a>");
 	            	}
                 %>
-            </div>s
+            </div>
         </div>
         </div>
     </body>
