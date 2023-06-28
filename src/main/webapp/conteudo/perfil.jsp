@@ -2,12 +2,11 @@
 <%@ page import="database.DBQuery" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.SQLException" %>
+
 <%
 	String userId = ""+session.getAttribute("userId");
     session.setAttribute("userId", userId);
-    
     int idUsuario = Integer.parseInt(userId);
-
     
 	DBQuery dbQuery = new DBQuery("usuario", "idUsuario, nome, email, telefone, cpf, foto", "idUsuario");
 	ResultSet rs = dbQuery.selectPerfil("idUsuario, nome, email, telefone, cpf. foto", idUsuario);
@@ -49,22 +48,22 @@
 				<div class="login">
 			    	<%
 			    	   if (userId == null){
-			    		   out.write("<a id='log' href='conteudo/login.jsp'><img src='../Imagens/menu/login.png' id='login' class='img-circle'><br><p>Login</p></a>");
+			    		   out.write("<a id='log' href='login.jsp'><img src='../Imagens/menu/login.png' id='login' class='img-circle'><br><p>Login</p></a>");
 			    	   }else{
-			    		   out.write("<a id='log' href='conteudo/perfil.jsp'><img src='../Imagens/menu/user.png' id='user' class='img-circle' /><br><p>Perfil</p></a>");
+			    		   out.write("<a id='log' href='perfil.jsp'><img src='../Imagens/menu/user.png' id='user' class='img-circle' /><br><p>Perfil</p></a>");
 			    	   }
 			    	%>
 			    </div>
 			
-			    <li> <a href="" onclick="$('#body').load('conteudo/body.html');">          Home 		</a> </li>
-			    <li> <a href="#" onclick="$('#body').load('conteudo/sobre.html');"> 		Sobre     	</a> </li>
-			    <li> <a href="#" onclick="$('#body').load('conteudo/produtos.html');">  	Produtos  	</a> </li>
+			    <li> <a href="../">        Home 		</a> </li>
+			    <li> <a href="#" onclick="$('#body').load('sobre.html');"> 		Sobre     	</a> </li>
+			    <li> <a href="#" onclick="$('#body').load('produtos.html');">  	Produtos  	</a> </li>
 			
 			    <img id="logoMenu" src="../Imagens/bom_corte/logo.jpg" class="img-circle"  title="BomCorte" />
 			  
-			    <li> <a href="#" onclick="$('#body').load('conteudo/agendamento.php');">  	Agendamento	</a> </li> 
-			    <li> <a href="#" onclick="$('#body').load('conteudo/cortes.html');">  		Cortes     	</a> </li>
-			    <li> <a href="#" onclick="$('#body').load('conteudo/contato.html');">  		Contato    	</a> </li>
+			    <li> <a href="#" onclick="$('#body').load('agendamento.php');">  	Agendamento	</a> </li> 
+			    <li> <a href="#" onclick="$('#body').load('cortes.html');">  		Cortes     	</a> </li>
+			    <li> <a href="#" onclick="$('#body').load('contato.html');">  		Contato    	</a> </li>
 			</ul>
 		</div>
         <div id="logo"><img id="logoBC" src="../Imagens/bom_corte/logo2.jpeg"/></div>
@@ -83,32 +82,32 @@
 						<div id="linkPerf">
 			    			<a style="display: inline-block;" href="alterarPerfil.jsp" > <img src="../Imagens/opc/gear.png" class="img-circle" Alt="alterar" title="Alterar"> <br> <p> Alterar </p> </a>
 			        		<br>
-			        		
-			                            <a style="display: inline-block; width: 48px;" href="conteudo/adm.jsp"> 
-			                            	<img src="../Imagens/opc/file.png" class="img-circle" Alt="adm" title="Adm"> 
-			                            	<br> 
-			                            	<p> ADM </p> 
-			                            </a>
-			               	
+                            <a style="display: inline-block; width: 48px;" href="conteudo/adm.jsp"> 
+                            	<img src="../Imagens/opc/file.png" class="img-circle" Alt="adm" title="Adm"> 
+                            	<br> 
+                            	<p> ADM </p> 
+                            </a>
 						</div>
 			            <div id="infoAlt">
 			                <br>
-			               	<h4 class="titulo">Nome:</h4> 			<p> <%=usuario.getNome() %> </p>
+			               	<h4 class="titulo">Nome:</h4>
+			               	<p> <%=usuario.getNome() %> </p>
 			                <br>
-			                <h4 class="titulo">Telefone:</h4> 		<p> <%=usuario.getTelefone() %></p>
+			                <h4 class="titulo">Telefone:</h4>
+			                <p> <%=usuario.getTelefone() %></p>
 			                <br>
-			                <h4 class="titulo">CPF:</h4> 			<p> <%=usuario.getCpf() %></p>
+			                <h4 class="titulo">CPF:</h4>
+			                <p> <%=usuario.getCpf() %></p>
 			            	<br>
 			            </div>
 			            <br>
-			            
 			            <form name="sair" id="formSair" method="post" action="Sair">
 			            	<button id="btnSair" type="button" onclick="this.form.submit()">Sair</button> 
 			            </form>
-			        
-        
+        			</div>
+        		</div>
+        	</div>
         </div>
-        
         <div id="footer">
         	<div id="foot">
 			    <footer>
@@ -130,11 +129,11 @@
 			            <div class="sec quickLinks">
 			                <h2>Links Rápidos </h2>
 			                <ul>
-			                    <li><a class="act" href="#" onclick="$('#body').load('conteudo/sobre.html');">Sobre</a></li>
+			                    <li><a class="act" href="#" onclick="$('#body').load('sobre.html');">Sobre</a></li>
 			                    <li><a class="block">Política de Privacidade</a></li>
 			                    <li><a class="block">Ajuda</a></li>
 			                    <li><a class="block">Termos & Condições</a></li>
-			                    <li><a class="act" href="#" onclick="$('#body').load('conteudo/contato.html');">Contato</a></li>
+			                    <li><a class="act" href="#" onclick="$('#body').load('contato.html');">Contato</a></li>
 			                </ul>
 			            </div>
 			            <div class="sec contact">
@@ -160,10 +159,7 @@
 			        <p>Desenvolvido por <span style="color: #FFC300;">LoopWare</span></p>
 			    </div>
 			</div>
-        
         </div>
-	
-		
 	</body>
 </html>
          
