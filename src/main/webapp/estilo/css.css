@@ -2,6 +2,7 @@
 
 body{
     background: #000;
+    transform: transform-origin: 0 0;
 }
 
 ::-webkit-scrollbar {
