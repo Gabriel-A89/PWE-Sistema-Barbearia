@@ -1,26 +1,36 @@
-
-
-
 <%@ page import="model.Usuario" %>
-
-
+<%@ page import="database.DBQuery" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.SQLException" %>
 <%
-
-
-	String idUsuario = request.getParameter("idUsuario");
-	String acao = request.getParameter("acao");
-
-   	if (acao.equals("1")){
-    	session.setAttribute("userId", idUsuario);
-        
-   	}else {
-   		response.sendRedirect("index.jsp");
-   	}
+	String userId = ""+session.getAttribute("userId");
+    session.setAttribute("userId", userId);
+    
+	DBQuery dbQuery = new DBQuery("usuario", "idUsuario, nome, email, telefone, cpf, foto", "idUsuario");
+	ResultSet rs = dbQuery.selectPerfil("idUsuario, nome, email, telefone, cpf. foto", 5);
+	
+	Usuario usuario = new Usuario();
+	
+	try {
+	    while (rs.next()) {
+	        usuario.setNome(rs.getString("nome"));
+	        usuario.setEmail(rs.getString("email"));
+	        usuario.setTelefone(rs.getString("telefone"));
+	        usuario.setCpf(rs.getString("cpf"));
+	        usuario.setFoto(rs.getString("foto"));
+	    }
+	    
+	    rs.close();
+	} catch (SQLException e) {
+	    // Handle any potential exceptions here
+	    e.printStackTrace();
+	}
+    
 %>
 
 <div id="perfil">
 	<div id="img">
-		<img id="imgPerfil" src="../Imagens/menu/user.png" class="img-circle" Alt="logo" title="BomCorte">
+		<img id="imgPerfil" src="Imagens/menu/user.png" class="img-circle" Alt="logo" title="BomCorte">
 	</div>
 	<br><br>
 	<div id="infoPerfil">
@@ -42,11 +52,11 @@
 			</div>
             <div id="infoAlt">
                 <br>
-               	<h4 class="titulo">Nome:</h4> 			<p> > </p>
+               	<h4 class="titulo">Nome:</h4> 			<p> <%=usuario.getNome() %> </p>
                 <br>
-                <h4 class="titulo">Telefone:</h4> 		<p> </p>
+                <h4 class="titulo">Telefone:</h4> 		<p> <%=usuario.getTelefone() %></p>
                 <br>
-                <h4 class="titulo">CPF:</h4> 			<p> </p>
+                <h4 class="titulo">CPF:</h4> 			<p> <%=usuario.getCpf() %></p>
             	<br>
             </div>
             <br>
