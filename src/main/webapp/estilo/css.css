@@ -2,7 +2,6 @@
 
 body{
     background: #000;
-    transform: transform-origin: 0 0;
 }
 
 ::-webkit-scrollbar {
@@ -408,6 +407,7 @@ a[href="#top"]:hover{
     border: none;
     outline: none;
     border-radius: 5px;
+    color: #000;
 }
 #formAlt label{
     color:#000;

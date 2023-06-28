@@ -68,6 +68,7 @@
 			</ul>
 		</div>
         <div id="logo"><img id="logoBC" src="../Imagens/bom_corte/logo2.jpeg"/></div>
+        
         <div id="body">
         	<div id="perfil">
 				<div id="img">
@@ -80,33 +81,27 @@
 					</h3>
 					<br>
 					<div id="ajust">
-						<div id="linkPerf">
-			    			<a style="display: inline-block;" href="alterarPerfil.jsp" > <img src="../Imagens/opc/gear.png" class="img-circle" Alt="alterar" title="Alterar"> <br> <p> Alterar </p> </a>
-			        		<br>
-			        		
-			                            <a style="display: inline-block; width: 48px;" href="conteudo/adm.jsp"> 
-			                            	<img src="../Imagens/opc/file.png" class="img-circle" Alt="adm" title="Adm"> 
-			                            	<br> 
-			                            	<p> ADM </p> 
-			                            </a>
-			               	
+	
+			           <a style="display: inline-block;" href="perfil.jsp" > <img src="../Imagens/opc/arrow.png" class="img-circle" Alt="voltar" title="Voltar"> <br> <p> Voltar </p> </a>
+						<br>
+						<div id="infoAlt">
+							<form name="alteracao" id="formAlt" method="post" action="AlterarPerfil" enctype="multipart/form-data">
+						    	<br>
+						        <h4 class="titulo">Nome:</h4> 			<input onchange="VerificacaoAlt(this.value)" class="formInput" type="text" name="name" required value="<%=usuario.getNome() %>" placeholder="Nome Completo">
+						        <br>
+						        <h4 class="titulo">Telefone:</h4> 		<input onchange="VerificacaoAlt(this.value)" class="formInput" type="tel" name="telefone" pattern="+[0-9]{13}" maxlength='14' required value="<%=usuario.getTelefone() %>" placeholder="+9999999999999">
+
+						        <input id="butMud" type="submit" value="Mudar!"> 
+						        <input id="butMud" type="reset" value="Redefinir!">
+						        <br>
+						    </form>
 						</div>
-			            <div id="infoAlt">
-			                <br>
-			               	<h4 class="titulo">Nome:</h4> 			<p> <%=usuario.getNome() %> </p>
-			                <br>
-			                <h4 class="titulo">Telefone:</h4> 		<p> <%=usuario.getTelefone() %></p>
-			                <br>
-			                <h4 class="titulo">CPF:</h4> 			<p> <%=usuario.getCpf() %></p>
-			            	<br>
-			            </div>
-			            <br>
-			            
-			            <form name="sair" id="formSair" method="post" action="Sair">
-			            	<button id="btnSair" type="button" onclick="this.form.submit()">Sair</button> 
-			            </form>
-			        
-        
+						<br>
+						<br>
+					</div>
+				</div>
+				
+			</div>
         </div>
         
         <div id="footer">
@@ -165,5 +160,25 @@
 	
 		
 	</body>
+	
+	<script>
+		function VerificacaoAlt(){
+					
+		    var name= alteracao.name.value;
+		    var telefone= alteracao.telefone.value;
+		    
+		    if (name.length <3) {
+		        alert("Preencha seu nome, com no mínimo 3 letras");
+		        alteracao.name.focus()
+		        return false;
+			}
+						
+		    if (telefone.length <= 13 || telefone.length >= 15) {
+		    	alert("Preencha seu telefone com 14 digitos!");
+		    	alteracao.telefone.focus()
+		    	return false;
+		    }
+		}
+	</script>
 </html>
          
