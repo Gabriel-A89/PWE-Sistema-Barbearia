@@ -48,9 +48,7 @@ body{
 	text-align: center;
 }
 
-.pfirst{
-	;
-}
+
 
 #ajust a{
 	font-family: arial, sans-serif;
@@ -178,6 +176,10 @@ body{
     box-shadow: 5px 20px 50px #000;
     max-width: 550px;
 }
+#adm form{
+	width: 100%;
+}
+
 #admR{
 	width: 95%;
     color: white;
@@ -295,12 +297,21 @@ table{
     width:100%;
 }
 
-table, th, td {
-    border:1px solid #FFAA00;
-    border-collapse:collapse;
-    text-align:left;
+table{
+	position: relative;
+	border: 1px solid #FFAA00;
+	border-collapse: collapse;
+	text-align: left;
+	color: white;
+	width: 80%;
+	font-size: 12px;
+	margin:20 auto;
 }
-
+td {
+	width: 100px;
+	height: 50px;
+	text-align:center;
+}
 tr td:nth-child(1)
 {
     text-align:center;
@@ -343,6 +354,36 @@ button{
 	width: 200px;
 }
 
+.formulario{
+	width: 90%;
+	padding: 10%;
+}
+.container-btn{
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+.btnADM{
+    position:relative;
+    padding:10px 0px;
+    width: 50%;
+    margin:10px;
+    display: inline-block;
+    text-decoration:none;
+    color:#FFAA00;
+    letter-spacing:2px;
+    transition:0.5s;
+    overflow:hidden;
+    background-color: #000;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.btnADM:hover{
+    color:#000;
+    background:#FFAA00;
+    transition: width 0.8s, height 0.8s;
+}
 @media screen and (max-width: 768px){
    #voltar{
        right:90%;
@@ -350,7 +391,7 @@ button{
    }
    #adm{
        height:auto;
-       max-width: 280px;
+       max-width: 580px;
    }
    #infoAlt {
    	   width: 360px;

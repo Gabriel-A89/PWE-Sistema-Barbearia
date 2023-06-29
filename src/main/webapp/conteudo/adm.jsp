@@ -2,11 +2,17 @@
 <%@ page import="database.DBQuery" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.SQLException" %>
+
+    	<%
+    		String userId = ""+session.getAttribute("userId");
+    	%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link href="../estilo/css.css" rel="stylesheet">
+        <link href="../estilo/crud.css" rel="stylesheet">
         <link rel="shortcut icon" type="x-icon" href="../Imagens/bom_corte/logo.jpg" />
         <title>BC Login</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -14,100 +20,113 @@
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
    
     </head>
-    	<%
-    		String userId = ""+session.getAttribute("userId");
-    	%>
+     <script type="text/javascript">
+
+        function carregar() {
+            $('#menu').load( 'conteudo/menu.jsp' );
+            $('#logo').load( 'conteudo/logo.html' );
+            $('#body').load( 'conteudo/body.html' );
+            $('#footer').load( 'conteudo/footer.html' );
+        }
+
+        $(document).ready(function(){
+
+            $(window).scroll(function(){
+                if ($(this).scrollTop() > 100) {
+                    $('a[href="#top"]').fadeIn();
+                } else {
+                    $('a[href="#top"]').fadeOut();
+                }
+            });
+
+            $('a[href="#top"]').click(function(){
+                $('html, body').animate({scrollTop : 0}, 'slow');
+                return false;
+            });
+			
+        });
+
+    </script>
+    	
 	<body> 
-		<div id="menu">
-			<ul id="ulMenu">
-				<div class="login">
-			    	<%
-			    	   if (userId == null){
-			    		   out.write("<a id='log' href='login.jsp'><img src='../Imagens/menu/login.png' id='login' class='img-circle'><br><p>Login</p></a>");
-			    	   }else{
-			    		   out.write("<a id='log' href='perfil.jsp'><img src='../Imagens/menu/user.png' id='user' class='img-circle' /><br><p>Perfil</p></a>");
-			    	   }
-			    	%>
-			    </div>
+		
 			
-			    <li> <a href="../">        Home 		</a> </li>
-			    <li> <a href="#" onclick="$('#body').load('sobre.html');"> 		Sobre     	</a> </li>
-			    <li> <a href="#" onclick="$('#body').load('produtos.html');">  	Produtos  	</a> </li>
-			
-			    <img id="logoMenu" src="../Imagens/bom_corte/logo.jpg" class="img-circle"  title="BomCorte" />
-			  
-			    <li> <a href="#" onclick="$('#body').load('agendamento.php');">  	Agendamento	</a> </li> 
-			    <li> <a href="#" onclick="$('#body').load('cortes.html');">  		Cortes     	</a> </li>
-			    <li> <a href="#" onclick="$('#body').load('contato.html');">  		Contato    	</a> </li>
-			</ul>
-		</div>
-        <div id="logo"><img id="logoBC" src="../Imagens/bom_corte/logo2.jpeg"/></div>
         <div id="body">
-        	<%
-    			String idUsuario = ""+request.getParameter("idUsuario");
-        		String nome = request.getParameter("nome");
-        		String email = request.getParameter("email");
-        		String senha = request.getParameter("senha");
-        		String telefone = request.getParameter("telefone");
-        		String cpf = request.getParameter("cpf");
-        		String foto = request.getParameter("foto");
-        		String idTipoUsuario = ""+request.getParameter("idTipoUsuario");
-        		
-        		String acao = request.getParameter("acao");
-        		
-        		if ((acao != null) && idUsuario != null){
-        			Usuario usuario = new Usuario(Integer.valueOf(idUsuario), nome, email, senha, telefone, cpf, foto, Integer.valueOf(idTipoUsuario));
-        			if (Integer.valueOf(acao) == 1){
-        				usuario.save();
-        			}else if(Integer.valueOf(acao) == 2){
-        				usuario.delete();
-        			}
-        				
-        		}
-        		
-        		String saida = new Usuario().listAllUsers(); 
-        		response.getWriter().write(saida);
-			%>
-        	<form action="adm.jsp" method="post">
-        		<h3>Cadastro de Usuario: </h3>
-        		<div class="form-group">
-        			<label for="idUsuario">Identificação do Usuário</label>
-        			<input type="number" id="idUsuario" name="idUsuario" class="form-control" value="0" />
-        		</div>
-        		<div class="form-group">
-        			<label for="idUsuario">Nome: </label>
-        			<input type="text" id="idUsuario" name="nome" class="form-control" value="0" />
-        		</div>
-        		<div class="form-group">
-        			<label for="idUsuario">Email: </label>
-        			<input type="text" id="idUsuario" name="email" class="form-control" value="0" />
-        		</div>
-        		<div class="form-group">
-        			<label for="idUsuario">Senha: </label>
-        			<input type="text" id="idUsuario" name="senha" class="form-control" value="0" />
-        		</div>
-        		<div class="form-group">
-        			<label for="idUsuario">Telefone: </label>
-        			<input type="text" id="idUsuario" name="telefone" class="form-control" value="0" />
-        		</div>
-        		<div class="form-group">
-        			<label for="idUsuario">CPF: </label>
-        			<input type="text" id="idUsuario" name="cpf" class="form-control" value="0" />
-        		</div>
-        		        		<div class="form-group">
-        			<label for="idUsuario">Foto: </label>
-        			<input type="text" id="idUsuario" name="foto" class="form-control" value="0" />
-        		</div>
-        		
-        		<div class="form-group">
-        			<label for="idUsuario">Identificação do Tipo de Usuário: </label>
-        			<input type="text" id="idUsuario" name="idTipoUsuario" class="form-control" value="0" />
-        		</div>
-        		<input type="hidden" name="acao" value="0" />
-        		<button type="submit" class="btn btn-primary" onclick="acao.value='1'; this.form.submt()">Salvar</button>
-        		<button type="submit" class="btn btn-primary" onclick="acao.value='2'; this.form.submt()">Excluir</button>
-        	</form>
+        	
+        	
+	        	<%
+	    			String idUsuario = ""+request.getParameter("idUsuario");
+	        	    String nome = request.getParameter("nome");
+	        		String email = request.getParameter("email");
+	        		String senha = request.getParameter("senha");
+	        		String telefone = request.getParameter("telefone");
+	        		String cpf = request.getParameter("cpf");
+	        		String foto = request.getParameter("foto");
+	        		String idTipoUsuario = ""+request.getParameter("idTipoUsuario");
+	        		
+	        		String acao = request.getParameter("acao");
+	        		
+	        		if ((acao != null) && idUsuario != null){
+	        			Usuario usuario = new Usuario(Integer.valueOf(idUsuario), nome, email, senha, telefone, cpf, foto, Integer.valueOf(idTipoUsuario));
+	        				if (Integer.valueOf(acao) == 1){
+	        					usuario.save();
+	        				}else if(Integer.valueOf(acao) == 2){
+	        					usuario.delete();
+	        				}
+	        				
+	        		}
+	        		
+	        		String saida = new Usuario().listAllUsers(); 
+	        		response.getWriter().write(saida);
+				%>
+
+			<div id="adm">
+				<form action="adm.jsp" method="post">
+	        		<h3 style="text-align:center; margin:10px 0;">Cadastro de Usuario: </h3>
+	        		<div class="form-group">
+	        			<label for="idUsuario">Identificação do Usuário</label>
+	        			<input type="number" id="idUsuario" name="idUsuario" class="form-control" value="0" />
+	        		</div>
+	        		<div class="form-group">
+	        			<label for="idUsuario">Nome: </label>
+	        			<input type="text" id="idUsuario" name="nome" class="form-control" value="0" />
+	        		</div>
+	        		<div class="form-group">
+	        			<label for="idUsuario">Email: </label>
+	        			<input type="text" id="idUsuario" name="email" class="form-control" value="0" />
+	        		</div>
+	        		<div class="form-group">
+	        			<label for="idUsuario">Senha: </label>
+	        			<input type="text" id="idUsuario" name="senha" class="form-control" value="0" />
+	        		</div>
+	        		<div class="form-group">
+	        			<label for="idUsuario">Telefone: </label>
+	        			<input type="text" id="idUsuario" name="telefone" class="form-control" value="0" />
+	        		</div>
+	        		<div class="form-group">
+	        			<label for="idUsuario">CPF: </label>
+	        			<input type="text" id="idUsuario" name="cpf" class="form-control" value="0" />
+	        		</div>
+	        		        		<div class="form-group">
+	        			<label for="idUsuario">Foto: </label>
+	        			<input type="text" id="idUsuario" name="foto" class="form-control" value="0" />
+	        		</div>
+	        		
+	        		<div class="form-group">
+	        			<label for="idUsuario">Identificação do Tipo de Usuário: </label>
+	        			<input type="text" id="idUsuario" name="idTipoUsuario" class="form-control" value="0" />
+	        		</div>
+	        		<input type="hidden" name="acao" value="0" />
+	        		<div class="container-btn">
+	        			<button type="submit" class="btnADM" class="" onclick="acao.value='1'; this.form.submt()">Salvar</button>
+	        			<button type="submit" class="btnADM" class="" onclick="acao.value='2'; this.form.submt()">Excluir</button>
+	        		</div>
+	        		
+	        	</form>
+			</div>
+        	
         </div>
+        
         <div id="footer">
         	<div id="foot">
 			    <footer>
