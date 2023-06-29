@@ -16,7 +16,7 @@
 
     <img id="logoMenu" src="Imagens/bom_corte/logo.jpg" class="img-circle"  title="BomCorte" />
   
-    <li> <a href="#" onclick="$('#body').load('conteudo/agendamento.php');">  	Agendamento	</a> </li> 
+    <li> <a href="conteudo/agendamento.jsp" >  		Agendamento     	</a> </li>
     <li> <a href="#" onclick="$('#body').load('conteudo/cortes.html');">  		Cortes     	</a> </li>
     <li> <a href="#" onclick="$('#body').load('conteudo/contato.html');">  		Contato    	</a> </li>
 </ul>

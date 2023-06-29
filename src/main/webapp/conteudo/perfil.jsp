@@ -43,6 +43,33 @@
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
    
     </head>
+     <script type="text/javascript">
+
+        function carregar() {
+            $('#menu').load( 'conteudo/menu.jsp' );
+            $('#logo').load( 'conteudo/logo.html' );
+            $('#body').load( 'conteudo/body.html' );
+            $('#footer').load( 'conteudo/footer.html' );
+        }
+
+        $(document).ready(function(){
+
+            $(window).scroll(function(){
+                if ($(this).scrollTop() > 100) {
+                    $('a[href="#top"]').fadeIn();
+                } else {
+                    $('a[href="#top"]').fadeOut();
+                }
+            });
+
+            $('a[href="#top"]').click(function(){
+                $('html, body').animate({scrollTop : 0}, 'slow');
+                return false;
+            });
+			
+        });
+
+    </script>
 	<body> 
 		<div id="menu">
 			<ul id="ulMenu">
@@ -56,13 +83,13 @@
 			    	%>
 			    </div>
 			
-			    <li> <a href="" onclick="$('#body').load('conteudo/body.html');">          Home 		</a> </li>
+			    <li> <a href="#" onclick="$('#body').load('conteudo/body.html');">          Home 		</a> </li>
 			    <li> <a href="#" onclick="$('#body').load('conteudo/sobre.html');"> 		Sobre     	</a> </li>
 			    <li> <a href="#" onclick="$('#body').load('conteudo/produtos.html');">  	Produtos  	</a> </li>
 			
 			    <img id="logoMenu" src="../Imagens/bom_corte/logo.jpg" class="img-circle"  title="BomCorte" />
 			  
-			    <li> <a href="#" onclick="$('#body').load('conteudo/agendamento.php');">  	Agendamento	</a> </li> 
+			    <li> <a href="conteudo/agendamento.jsp" >  		Agendamento     	</a> </li>
 			    <li> <a href="#" onclick="$('#body').load('conteudo/cortes.html');">  		Cortes     	</a> </li>
 			    <li> <a href="#" onclick="$('#body').load('conteudo/contato.html');">  		Contato    	</a> </li>
 			</ul>
