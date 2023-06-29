@@ -32,14 +32,6 @@ public class AlterarPerfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Usuario usuario = new Usuario();
 		
 		usuario.setNome(request.getParameter("nome"));
@@ -47,15 +39,20 @@ public class AlterarPerfil extends HttpServlet {
 		usuario.setTelefone(request.getParameter("telefone"));
 		usuario.setCpf(request.getParameter("cpf"));
 		
-
-		
-		DBQuery dbQuery = new DBQuery("usuario", "nome, email, telefone, cpf", "idUsuario");
+		DBQuery dbQuery = new DBQuery("usuario", "nome, telefone", "idUsuario");
 		
 		/*dbQuery.setFieldsName();*/
-				
+		
 		String acao = ""+dbQuery.update(usuario.toArrayAlteracao());
 		
 		response.sendRedirect("confAlterar.jsp?acao="+acao);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		
 	}
 

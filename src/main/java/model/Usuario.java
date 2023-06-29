@@ -115,8 +115,6 @@ public class Usuario {
 		return (
 			new String[] {
 					""+this.getNome(),
-					""+this.getEmail(),
-					""+this.getTelefone(),
 					""+this.getCpf(),
 			}
 		);
@@ -145,6 +143,31 @@ public class Usuario {
 			e.printStackTrace();
 		}
 		return(usuarios);
+	}
+	
+	public String listAllUsers() {
+		ResultSet rs = this.dbQuery.selectUsers("");
+		String saida = "<br>";
+		saida += "<table border=1>";
+		
+		try {
+			while (rs.next()) {
+				saida += "<tr>";
+				saida += "<td>" + rs.getInt("idUsuario") + "</td>";
+				saida += "<td>" + rs.getString("nome") + "</td>";
+				saida += "<td>" + rs.getString("email") + "</td>";
+				saida += "<td>" + rs.getString("senha") + "</td>";
+				saida += "<td>" + rs.getString("telefone") + "</td>";
+				saida += "<td>" + rs.getString("cpf") + "</td>";
+				saida += "<td>" + rs.getString("foto") + "</td>";
+				saida += "<td>" + rs.getInt("idTipoUsuario") + "</td>";
+				saida += "</tr> <br>";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		saida += "</table>";
+		return(saida);
 	}
 	
 	public ArrayList<Usuario> listEmailCadastro(String value) {

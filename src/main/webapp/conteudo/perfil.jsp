@@ -82,7 +82,7 @@
 						<div id="linkPerf">
 			    			<a style="display: inline-block;" href="alterarPerfil.jsp" > <img src="../Imagens/opc/gear.png" class="img-circle" Alt="alterar" title="Alterar"> <br> <p> Alterar </p> </a>
 			        		<br>
-                            <a style="display: inline-block; width: 48px;" href="conteudo/adm.jsp"> 
+                            <a style="display: inline-block; width: 48px;" href="adm.jsp"> 
                             	<img src="../Imagens/opc/file.png" class="img-circle" Alt="adm" title="Adm"> 
                             	<br> 
                             	<p> ADM </p> 
