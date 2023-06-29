@@ -16,7 +16,7 @@ import model.Usuario;
 /**
  * Servlet implementation class AlterarPerfil
  */
-@WebServlet("/conteudo/AlterarPerfil")
+@WebServlet("/conteudo/alterarperfil")
 public class AlterarPerfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,14 +32,27 @@ public class AlterarPerfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		Usuario usuario = new Usuario();
+		
+		usuario.setNome(request.getParameter("nome"));
+		usuario.setEmail(request.getParameter("email"));
+		usuario.setTelefone(request.getParameter("telefone"));
+		usuario.setCpf(request.getParameter("cpf"));
+		
+		DBQuery dbQuery = new DBQuery("usuario", "nome, telefone", "idUsuario");
+		
+		/*dbQuery.setFieldsName();*/
+		
+		String acao = ""+dbQuery.update(usuario.toArrayAlteracao());
+		
+		response.sendRedirect("confAlterar.jsp?acao="+acao);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		
 	}
 

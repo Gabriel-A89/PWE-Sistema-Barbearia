@@ -92,6 +92,13 @@ public class DBQuery {
 		return this.query(sql);
 	}
 	
+	public ResultSet selectUsers(String where) {
+		String sql = "SELECT "+  this.joinElements(this.fieldsName, ", ") + " FROM " + this.tableName;
+		sql += (( where!="") ? " WHERE "+ where : "" );
+		System.out.print(sql);
+		return this.query(sql);
+	}
+	
 	public ResultSet selectLogin(String where, String value) {
 		String sql = "SELECT "+  this.joinElements(this.fieldsName, ", ") + " FROM " + this.tableName;
 		sql += " WHERE email = " + "'"+value+"';";
@@ -137,19 +144,19 @@ public class DBQuery {
 	}
 	
 	public int update(String[] values) {
-		
 		if (values.length != this.fieldsName.length){
 			System.out.println("\n A quantidade de campos é diferente da quantidade de valores!");
 			return ( 0 );
 		}
-		
 		String sql = "\nUPDATE "+this.tableName+" SET ";
 		for( int i=0; i <  values.length; i++){
+			System.out.print( sql );
 			sql += "\n\t "+
 				this.fieldsName[i] + " = '"+values[i].trim()+"'" 
-				+  ((i == values.length-1) ? "" : ", ");
+				+  ((i == values.length) ? "" : ", ");
 		}
 		if ( this.keyFieldIndex < 0 ){
+			System.out.println("e");
 			return(0);
 		}
 		sql += "\n WHERE "+ this.fieldKey +" = '"+ values[this.keyFieldIndex] +"'";

@@ -51,6 +51,14 @@ public class Usuario {
 		this.setCpf(cpf);
 	}
 	
+	public Usuario(String nome, String email, String telefone, String cpf){
+		this.setNome(nome);
+		this.setEmail(email);
+		this.setSenha(senha);
+		this.setTelefone(telefone);
+		this.setCpf(cpf);
+	}
+	
 	public Usuario(String email, String senha) {
 		this.setEmail(email);
 		this.setSenha(senha);
@@ -63,14 +71,14 @@ public class Usuario {
 	public String toString() {
 		
 		String outStr = 
-				this.getIdUsuario() + " | " +
-				this.getEmail() + " | " +
-				this.getSenha() + " | " +
-				this.getIdNivelUsuario() + " | " +
-				this.getNome() + " | " +
-				this.getCpf() + " | " +
-				this.getTelefone() + " | " +
-				this.getFoto() + " | " +
+				this.getIdUsuario() + ", " +
+				this.getEmail() + ", " +
+				this.getSenha() + ", " +
+				this.getIdNivelUsuario() + ", " +
+				this.getNome() + ", " +
+				this.getCpf() + ", " +
+				this.getTelefone() + ", " +
+				this.getFoto() + ", " +
 				this.getUsuarioDAO();
 				
 		return outStr;
@@ -102,6 +110,15 @@ public class Usuario {
 			}
 		);
 	}
+	
+	public String[] toArrayAlteracao(){
+		return (
+			new String[] {
+					""+this.getNome(),
+					""+this.getCpf(),
+			}
+		);
+	}
 
 	private ArrayList<Usuario> listAll() {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
@@ -126,6 +143,31 @@ public class Usuario {
 			e.printStackTrace();
 		}
 		return(usuarios);
+	}
+	
+	public String listAllUsers() {
+		ResultSet rs = this.dbQuery.selectUsers("");
+		String saida = "<br>";
+		saida += "<table border=1>";
+		
+		try {
+			while (rs.next()) {
+				saida += "<tr>";
+				saida += "<td>" + rs.getInt("idUsuario") + "</td>";
+				saida += "<td>" + rs.getString("nome") + "</td>";
+				saida += "<td>" + rs.getString("email") + "</td>";
+				saida += "<td>" + rs.getString("senha") + "</td>";
+				saida += "<td>" + rs.getString("telefone") + "</td>";
+				saida += "<td>" + rs.getString("cpf") + "</td>";
+				saida += "<td>" + rs.getString("foto") + "</td>";
+				saida += "<td>" + rs.getInt("idTipoUsuario") + "</td>";
+				saida += "</tr> <br>";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		saida += "</table>";
+		return(saida);
 	}
 	
 	public ArrayList<Usuario> listEmailCadastro(String value) {

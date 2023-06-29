@@ -56,15 +56,15 @@
 			    	%>
 			    </div>
 			
-			    <li> <a href="" onclick="$('#body').load('conteudo/body.html');">          Home 		</a> </li>
-			    <li> <a href="#" onclick="$('#body').load('conteudo/sobre.html');"> 		Sobre     	</a> </li>
-			    <li> <a href="#" onclick="$('#body').load('conteudo/produtos.html');">  	Produtos  	</a> </li>
+			    <li> <a href="" onclick="$('#body').load('body.html');">          Home 		</a> </li>
+			    <li> <a href="#" onclick="$('#body').load('sobre.html');"> 		Sobre     	</a> </li>
+			    <li> <a href="#" onclick="$('#body').load('produtos.html');">  	Produtos  	</a> </li>
 			
 			    <img id="logoMenu" src="../Imagens/bom_corte/logo.jpg" class="img-circle"  title="BomCorte" />
 			  
-			    <li> <a href="#" onclick="$('#body').load('conteudo/agendamento.php');">  	Agendamento	</a> </li> 
-			    <li> <a href="#" onclick="$('#body').load('conteudo/cortes.html');">  		Cortes     	</a> </li>
-			    <li> <a href="#" onclick="$('#body').load('conteudo/contato.html');">  		Contato    	</a> </li>
+			    <li> <a href="#" onclick="$('#body').load('agendamento.php');">  	Agendamento	</a> </li> 
+			    <li> <a href="#" onclick="$('#body').load('cortes.html');">  		Cortes     	</a> </li>
+			    <li> <a href="#" onclick="$('#body').load('contato.html');">  		Contato    	</a> </li>
 			</ul>
 		</div>
         <div id="logo"><img id="logoBC" src="../Imagens/bom_corte/logo2.jpeg"/></div>
@@ -81,15 +81,16 @@
 					</h3>
 					<br>
 					<div id="ajust">
-	
-			           <a style="display: inline-block;" href="perfil.jsp" > <img src="../Imagens/opc/arrow.png" class="img-circle" Alt="voltar" title="Voltar"> <br> <p> Voltar </p> </a>
+			        	<a style="display: inline-block;" href="perfil.jsp" > <img src="../Imagens/opc/arrow.png" class="img-circle" Alt="voltar" title="Voltar"> <br> <p> Voltar </p> </a>
 						<br>
 						<div id="infoAlt">
-							<form name="alteracao" id="formAlt" method="post" action="AlterarPerfil" enctype="multipart/form-data">
+							<form name="alteracao" id="formAlt" method="get" action="alterarperfil" enctype="multipart/form-data">
 						    	<br>
-						        <h4 class="titulo">Nome:</h4> 			<input onchange="VerificacaoAlt(this.value)" class="formInput" type="text" name="name" required value="<%=usuario.getNome() %>" placeholder="Nome Completo">
+						        <h4 class="titulo">Nome:</h4>
+						        <input onchange="VerificacaoAlt()" class="formInput" type="text" name="nome" value="<%=usuario.getNome() %>" required placeholder="Nome Completo">
 						        <br>
-						        <h4 class="titulo">Telefone:</h4> 		<input onchange="VerificacaoAlt(this.value)" class="formInput" type="tel" name="telefone" pattern="+[0-9]{13}" maxlength='14' required value="<%=usuario.getTelefone() %>" placeholder="+9999999999999">
+						        <h4 class="titulo">Telefone:</h4>
+						        <input onchange="VerificacaoAlt()" class="formInput" type="tel" name="telefone" pattern="+[0-9]{13}" maxlength='14' value="<%=usuario.getTelefone() %>" required placeholder="+9999999999999">
 
 						        <input id="butMud" type="submit" value="Mudar!"> 
 						        <input id="butMud" type="reset" value="Redefinir!">
@@ -100,7 +101,6 @@
 						<br>
 					</div>
 				</div>
-				
 			</div>
         </div>
         
@@ -125,11 +125,11 @@
 			            <div class="sec quickLinks">
 			                <h2>Links Rápidos </h2>
 			                <ul>
-			                    <li><a class="act" href="#" onclick="$('#body').load('conteudo/sobre.html');">Sobre</a></li>
+			                    <li><a class="act" href="#" onclick="$('#body').load('sobre.html');">Sobre</a></li>
 			                    <li><a class="block">Política de Privacidade</a></li>
 			                    <li><a class="block">Ajuda</a></li>
 			                    <li><a class="block">Termos & Condições</a></li>
-			                    <li><a class="act" href="#" onclick="$('#body').load('conteudo/contato.html');">Contato</a></li>
+			                    <li><a class="act" href="#" onclick="$('#body').load('contato.html');">Contato</a></li>
 			                </ul>
 			            </div>
 			            <div class="sec contact">
